@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <!-- NOTE: page is intentionally anonymized for review: no author names, no institution. -->
+  <meta name="title" content="Contact-Implicit Stein Projected ADMM for Discovery of Diverse Contact-Rich Manipulation Strategies">
+  <meta name="description" content="Stein Projected ADMM injects Stein repulsion into ADMM's split variable to discover diverse, feasible contact-rich manipulation strategies in one solve.">
+  <meta name="keywords" content="contact-implicit trajectory optimization, Stein variational inference, SVGD, ADMM, variable splitting, complementarity constraints, contact-rich manipulation, diverse grasping, non-prehensile pushing, non-smooth mechanics">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Contact-Implicit Stein Projected ADMM for Discovery of Diverse Contact-Rich Manipulation Strategies">
+  <meta property="og:description" content="A solver that combines Stein variational inference with consensus ADMM to discover many distinct, feasible contact-rich manipulation strategies in a single run.">
+  <meta property="og:image" content="static/images/diverse_grasps_two_column.png">
+  <meta property="og:image:alt" content="Diverse dexterous-hand grasps and dual-humanoid hand-over solutions found by Stein Projected ADMM">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Contact-Implicit Stein Projected ADMM for Discovery of Diverse Contact-Rich Manipulation Strategies">
+  <meta name="twitter:description" content="Stein repulsion applied to ADMM's split variable discovers diverse, feasible contact-rich manipulation strategies in a single solve.">
+  <meta name="twitter:image" content="static/images/diverse_grasps_two_column.png">
+
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title" content="Contact-Implicit Stein Projected ADMM for Discovery of Diverse Contact-Rich Manipulation Strategies">
+  <meta name="citation_publication_date" content="2026">
+
+  <meta name="theme-color" content="#2563eb">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+  <title>Contact-Implicit Stein Projected ADMM for Discovery of Diverse Contact-Rich Manipulation Strategies | Under Review</title>
+
+  <!-- Favicon and App Icons (downscaled from static/images/favicon.png) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="static/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="any" href="static/images/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="static/images/favicon-180.png">
+
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+
+  <!-- Fonts - Optimized loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+
+  <!-- Local page styles -->
+  <style>
+    /* "Coming soon" buttons: styled like the other links, but not clickable. */
+    .button.is-coming-soon {
+      opacity: 0.55;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .figure-block {
+      margin-bottom: 2.5rem;
+    }
+    .figure-block img,
+    .figure-block video {
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+    }
+    .figure-caption {
+      margin-top: 0.85rem;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #4a4a4a;
+    }
+    .results-carousel .item img {
+      display: block;
+      margin: 0 auto;
+      max-height: 420px;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+    }
+    /* Hardware video grid: muted autoplay on loop, with controls available. */
+    .video-grid video {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 6px;
+      background: #000;
+    }
+  </style>
+
+  <!-- Structured Data for Academic Papers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "Contact-Implicit Stein Projected ADMM for Discovery of Diverse Contact-Rich Manipulation Strategies",
+    "description": "A solver that combines Stein variational inference with consensus ADMM to discover many distinct, feasible contact-rich manipulation strategies in a single run.",
+    "datePublished": "2026",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Under Review"
+    },
+    "image": "static/images/diverse_grasps_two_column.png",
+    "keywords": ["contact-implicit trajectory optimization", "Stein variational inference", "ADMM", "complementarity constraints", "contact-rich manipulation", "diverse grasping"],
+    "abstract": "Contact-implicit trajectory optimization formulates contact-rich manipulation as a single constrained program; however, that single program run collapses onto one local optimum out of many equally valid contact modes, grasps, or push directions. As a consequence, the resulting manipulation strategy is reluctant to change and sensitive to initialization. In order to promote robust manipulation, this paper investigates how contact-implicit solvers can discover diverse contact-rich strategies. Our approach derives a variation of Consensus Alternating Direction Method of Multipliers (ADMM) combined with Stein variational inference methods to output a set of distinct contact-rich solutions. We find that applying the Stein repulsive force to ADMM's split variable (rather than its primal form) allows for effective coverage over the set of feasible contact strategies without prematurely stalling the solver. We demonstrate the effectiveness of our approach on a variety of contact-rich manipulation tasks, including pushing, grasping, and multi-robot handover. Last, we find the proposed solver is simpler in form and capable of discovering unique contact modes when compared with existing solvers.",
+    "isAccessibleForFree": true,
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "about": [
+      {
+        "@type": "Thing",
+        "name": "Contact-Implicit Optimization"
+      },
+      {
+        "@type": "Thing",
+        "name": "Variational Inference"
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <main id="main-content">
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Contact-Implicit Stein Projected ADMM for Discovery of Diverse Contact-Rich Manipulation Strategies</h1>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Anonymous Authors</span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Paper under review &mdash; author and affiliation information withheld</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- Paper is not yet on arXiv -->
+                <span class="link-block">
+                  <span class="external-link button is-normal is-rounded is-dark is-coming-soon">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper coming soon</span>
+                  </span>
+                </span>
+
+                <!-- Code release pending -->
+                <span class="link-block">
+                  <span class="external-link button is-normal is-rounded is-dark is-coming-soon">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code coming soon</span>
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+
+<!-- Teaser figure -->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="static/images/diverse_grasps_two_column.png"
+           alt="Left: overlaid contact forces on an L-shaped object and on a box. Right: eight distinct dexterous-hand grasps (top row) and eight distinct dual-humanoid hand-over configurations (bottom row) produced by Stein Projected ADMM."/>
+      <h2 class="subtitle has-text-centered">
+        <b>Fig. 1:</b> This paper proposes Stein Projected ADMM, a method that discovers diverse, feasible contact-rich
+        manipulation strategies by combining Stein variational inference and Alternating Direction Method of Multipliers
+        (ADMM). Illustrated are diverse solutions for single-object grasps (top) and dual-humanoid stable hand-over
+        (bottom).
+      </h2>
+    </div>
+  </div>
+</section>
+<!-- End teaser figure -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Contact-implicit trajectory optimization formulates contact-rich manipulation as a single constrained
+            program; however, that single program run collapses onto one local optimum out of many equally valid
+            contact modes, grasps, or push directions. As a consequence, the resulting manipulation strategy is
+            reluctant to change and sensitive to initialization. In order to promote robust manipulation, this paper
+            investigates how contact-implicit solvers can discover diverse contact-rich strategies. Our approach
+            derives a variation of Consensus Alternating Direction Method of Multipliers (ADMM) combined with Stein
+            variational inference methods to output a set of distinct contact-rich solutions. We find that applying
+            the Stein repulsive force to ADMM's split variable (rather than its primal form) allows for effective
+            coverage over the set of feasible contact strategies without prematurely stalling the solver. We
+            demonstrate the effectiveness of our approach on a variety of contact-rich manipulation tasks, including
+            pushing, grasping, and multi-robot handover. Last, we find the proposed solver is simpler in form and
+            capable of discovering unique contact modes when compared with existing solvers.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+
+<!-- Method -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <h2 class="title is-3 has-text-centered">Methods</h2>
+
+        <div class="figure-block">
+          <img src="static/images/method_overview.png"
+               alt="Seven panels showing the Stein Projected ADMM update on a complementarity problem: initial particles, reference repelled z, projected z at iterations 0 and 1, and the feasible, evenly spread particle set after 100 iterations."
+               loading="lazy"/>
+          <p class="figure-caption has-text-centered">
+            <b>Fig. 2:</b> Overview of projected variable-splitting construction on a motivating complementarity problem
+            with constraints 0 &le; &lambda; &perp; &phi; &ge; 0, and objective
+            <i>f</i> = &frac12;&#8741;[&lambda;, &phi;]<sup>&#8868;</sup> &minus;
+            [&lambda;<sup>&#8902;</sup>, &phi;<sup>&#8902;</sup>]<sup>&#8868;</sup>&#8741;<sub>2</sub><sup>2</sup>.
+            The initial particles <i>x</i> are first split into duplicate <i>z</i> variables. The Stein repulsion is
+            measured according to <i>z</i> to produce <i>z&#771;</i> as a target reference which is projected onto the
+            feasible set <i>C</i>. The <i>x</i>-update then tracks the objective while being pulled toward the feasible
+            set <i>C</i> through the split variable.
+          </p>
+        </div>
+
+        <div class="content has-text-justified">
+          <p>
+            Contact-implicit optimization encodes contact through complementarity constraints, so the feasible set is a
+            union of lower-dimensional manifolds &mdash; one per contact mode. A single solve lands in one of them and
+            discards every other equally valid strategy. Prior constrained-SVGD methods fold feasibility and diversity
+            into the same update, so the repulsion term ends up competing with constraint satisfaction.
+          </p>
+          <p>
+            Our construction separates the two. The Stein repulsive force acts <b>only on ADMM's split variable</b>
+            <i>z</i>, which is then <b>exactly projected</b> onto the feasible set at every outer iteration. The primal
+            <i>x</i>-update therefore never sees an infeasible perturbation; it simply chases a target that is already
+            feasible and already diverse. This requires no kernel-space quadratic program and no merit-function line
+            search.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End method -->
+
+
+<!-- Image carousel -->
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered">Results</h2>
+      <div id="results-carousel" class="carousel results-carousel">
+
+        <div class="item">
+          <img src="static/images/toy_problems.png"
+               alt="Four-column comparison on the annulus problem (top) and complementarity problem (bottom): ground truth, ADMM with x-repulsion, SteinSQP, and Stein Projected ADMM." loading="lazy"/>
+          <h2 class="subtitle has-text-centered">
+            <b>Fig. 3:</b> Illustrative example of <i>N</i> = 512 particles, on the annulus problem (top) and the
+            complementarity problem (bottom). At large samples, the proposed approach evenly spreads particles within
+            the feasible set within tolerance. Baseline methods have comparable performance at low-particle numbers but
+            overemphasize certain regions with larger particle sizes.
+          </h2>
+        </div>
+
+        <div class="item">
+          <img src="static/images/complementarity_scaling.png"
+               alt="Two log-scale plots versus particle count: wall-clock time to convergence and iterations to convergence, comparing Stein Projected ADMM against SteinSQP." loading="lazy"/>
+          <h2 class="subtitle has-text-centered">
+            <b>Fig. 4:</b> Numerical comparison on complementarity problem. (Left) Wall-clock time to first reach
+            constraint tol = 10<sup>&minus;4</sup> vs. particle count <i>N</i> (over 9 seeds). (Right) iterations to
+            convergence for Stein Projected ADMM (ours) and SteinSQP. Experiments were conducted on an Apple M4 Pro
+            chip.
+          </h2>
+        </div>
+
+        <div class="item">
+          <img src="static/images/box_pivoting_final_config.png"
+               alt="Three panels of a pivoted box with overlaid finger placements and friction cones for Stein Projected ADMM, plain ADMM, and Stein SQP." loading="lazy"/>
+          <h2 class="subtitle has-text-centered">
+            <b>Fig. 6:</b> Final overlaid configurations and finger placements in the box pivoting problem for Stein
+            Projected ADMM (ours), the repulsion-off ADMM baseline, and SteinSQP.
+          </h2>
+        </div>
+
+        <div class="item">
+          <img src="static/images/cube_pushing_overlap.png"
+               alt="Eight small panels each showing a different cube-pushing trajectory from the same start to the same goal pose, plus one panel overlaying all eight." loading="lazy"/>
+          <h2 class="subtitle has-text-centered">
+            <b>Fig. 7:</b> Diverse cube-pushing trajectories generated from Stein Projected ADMM. Each trajectory
+            particle reaches the same goal pose via different contact strategies. (Left) Rendered particle trajectories
+            with contact forces and points. (Right) Overlaid trajectory distribution.
+          </h2>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End image carousel -->
+
+
+<!-- Animation carousel -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3 has-text-centered">Solver in Motion</h2>
+      <div class="carousel results-carousel">
+
+        <div class="item">
+          <img src="static/images/stein_projected_admm_evolution.gif"
+               alt="Animation of particles on the complementarity problem separating into two modes along the two feasible axes over solver iterations." loading="lazy"/>
+          <h2 class="subtitle has-text-centered">
+            Particle evolution on the complementarity problem. Starting from a single cluster, the repelled-and-projected
+            split variable pulls the ensemble outward until particles split evenly across both feasible contact modes.
+          </h2>
+        </div>
+
+        <div class="item">
+          <img src="static/images/cube_pushing_overlap.gif"
+               alt="Animation of eight colored pushers simultaneously driving a cube from the start pose to the dashed goal pose along different paths." loading="lazy"/>
+          <h2 class="subtitle has-text-centered">
+            Eight diverse cube pushes executing in parallel. Every particle reaches the same 45&deg; goal pose, but each
+            makes and breaks contact on a different face along the way.
+          </h2>
+        </div>
+
+        <div class="item">
+          <img src="static/images/grasp_discovery.gif"
+               alt="Animation adding one grasp at a time to an L-shaped object, each with three contact points and force arrows." loading="lazy"/>
+          <h2 class="subtitle has-text-centered">
+            Quasi-static grasps accumulating on a non-convex L-shaped object. Each added grasp places its contact points
+            and forces in a different region while holding the object in equilibrium.
+          </h2>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End animation carousel -->
+
+
+<!-- Hardware -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <h2 class="title is-3 has-text-centered">Hardware Experiments</h2>
+
+        <div class="figure-block">
+          <img src="static/images/hw_diverse_grasps.png"
+               alt="A strip of eight photographs of a dexterous robot hand grasping a green non-convex object with visibly different finger placements in each."
+               loading="lazy"/>
+          <p class="figure-caption has-text-centered">
+            Diverse grasps on Allegro hand hardware solved with Stein-projected ADMM. We evaluate four-fingered
+            quasi-static grasps of a non-convex object that runs in real-time (we refer the reader to the multimedia
+            material). The executed grasp is chosen via an optimistic (best cost) heuristic from the solved candidate
+            grasps.
+          </p>
+        </div>
+
+        <h3 class="title is-5 has-text-centered">Executing candidate grasps</h3>
+        <div class="content has-text-justified">
+          <p>
+            One solve returns an ensemble of candidate grasps, and our method executes the best-quality grasp from that
+            particle set. Below, four of the candidates are run on the hardware one at a time: each reaches the same
+            quasi-static equilibrium on the same non-convex object, but commits to a different set of finger placements
+            and contact forces. Each grasp is then disturbed by hand to check that it actually holds.
+          </p>
+        </div>
+
+        <div class="columns is-multiline video-grid">
+          <div class="column is-half">
+            <video autoplay muted loop playsinline controls preload="auto" poster="static/images/posters/particle_1.jpg">
+              <source src="static/videos/hardware/particle_1.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-half">
+            <video autoplay muted loop playsinline controls preload="auto" poster="static/images/posters/particle_2.jpg">
+              <source src="static/videos/hardware/particle_2.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-half">
+            <video autoplay muted loop playsinline controls preload="auto" poster="static/images/posters/particle_3.jpg">
+              <source src="static/videos/hardware/particle_3.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="column is-half">
+            <video autoplay muted loop playsinline controls preload="auto" poster="static/images/posters/particle_4.jpg">
+              <source src="static/videos/hardware/particle_4.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End hardware -->
+
+
+<!-- BibTeX citation: hidden until the paper has a citable venue. Re-enable by
+     removing the surrounding comment markers and filling in the entry.
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="bibtex-header">
+        <h2 class="title">BibTeX</h2>
+        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+          <i class="fas fa-copy"></i>
+          <span class="copy-text">Copy</span>
+        </button>
+      </div>
+      <pre id="bibtex-code"><code>@inproceedings{anonymous2026steinadmm,
+  title     = {Contact-Implicit Stein Projected ADMM for Discovery of
+               Diverse Contact-Rich Manipulation Strategies},
+  author    = {Anonymous Authors},
+  year      = {2026},
+  note      = {Under review}
+}</code></pre>
+    </div>
+  </section>
+
+     End BibTeX citation -->
+
+  </main>
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  </body>
+  </html>
