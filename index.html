@@ -105,6 +105,14 @@
       max-width: 100%;
       object-fit: contain;
     }
+    .supplementary-video {
+      display: block;
+      margin: 0 auto;
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      background: #000;
+    }
     /* Hardware video grid: muted autoplay on loop, with controls available. */
     .video-grid video {
       width: 100%;
@@ -198,6 +206,22 @@
     </div>
 </section>
 
+
+<!-- Supplementary video -->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video id="supplementary-video" class="supplementary-video" controls playsinline preload="metadata">
+        <source src="static/videos/icra-27-supplementary-final.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <h2 class="subtitle has-text-centered">
+        Supplementary video.
+      </h2>
+    </div>
+  </div>
+</section>
+<!-- End supplementary video -->
 
 <!-- Teaser figure -->
 <section class="hero teaser">
